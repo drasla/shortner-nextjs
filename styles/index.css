@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@layer base, theme, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@source "../app";
+@source "../components";
+
+:root {
+    font-size: 0.875rem;
+
+    --default-font-family: "Pretendard", sans-serif;
+    --height-header: 54px;
+
+    --color-theme-text: rgba(255, 255, 255, 1);
+
+    --color-primary-main: rgb(162, 37, 45);
+}
+
+@theme {
+    --height-header: var(--height-header);
+
+    --color-theme-text: var(--color-theme-text);
+
+    --color-primary-main: var(--color-primary-main);
+}

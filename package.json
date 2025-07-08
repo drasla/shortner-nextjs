@@ -1,17 +1,20 @@
 {
-    "name": "shortner-nextjs",
+    "name": "shortener-nextjs",
     "version": "0.0.1",
     "description": "",
     "main": "dist/index.js",
     "scripts": {
         "dev": "NODE_OPTIONS='--inspect' PORT=50011 next dev --turbopack",
-        "prisma:merge": "ts-node scripts/mergePrisma.ts",
-        "prisma:generate": "dotenv -e .env.development -- pnpm run prisma:merge && prisma generate",
+        "merge:prisma": "ts-node scripts/mergePrisma.ts",
+        "generate:prisma": "dotenv -e .env.development -- pnpm run merge:prisma && prisma generate",
+        "studio:prisma": "dotenv -e .env.development -- prisma studio",
         "build": "next build"
     },
     "dependencies": {
+        "@prisma/client": "^6.11.1",
         "dayjs": "^1.11.13",
         "decimal.js": "^10.6.0",
+        "dotenv": "^17.1.0",
         "next": "^15.3.5",
         "next-intl": "^4.3.4",
         "pbkdf2": "^3.1.3",
@@ -20,6 +23,7 @@
         "react-hook-form": "^7.60.0",
         "react-icons": "^5.5.0",
         "tailwind-merge": "^3.3.1",
+        "uuid": "^11.1.0",
         "zod": "^3.25.75"
     },
     "devDependencies": {
@@ -28,13 +32,17 @@
         "@types/pbkdf2": "^3.1.2",
         "@types/react": "^19.1.8",
         "@types/react-dom": "^19.1.6",
+        "@types/uuid": "^10.0.0",
+        "dotenv-cli": "^8.0.0",
         "eslint": "^9.30.1",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-react": "^7.37.5",
         "globals": "^16.3.0",
         "postcss": "^8.5.6",
         "prettier": "^3.6.2",
+        "prisma": "^6.11.1",
         "tailwindcss": "^4.1.11",
+        "ts-node": "^10.9.2",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.36.0"
     },

@@ -1,0 +1,11 @@
+model LoginAttempt {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+
+  email     String
+  ipAddress String
+  userAgent String?
+  success   Boolean
+
+  @@map("login_attemps")
+}

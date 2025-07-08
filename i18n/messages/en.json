@@ -1,4 +1,35 @@
 {
-    "title": "Hello",
-    "description": "This is the English page."
+    "title": "Title",
+    "description": "Description",
+    "api": {
+        "auth": {
+            "signIn": {
+                "success": "Login successful.",
+                "invalidCredentials": "Invalid email or password."
+            },
+            "signUp": {
+                "success": "Registration completed successfully.",
+                "emailExists": "Email is already in use."
+            },
+            "signOut": {
+                "success": "Logged out successfully."
+            },
+            "unauthorized": "Authentication required.",
+            "invalidSession": "Invalid session.",
+            "forbidden": "Administrator privileges required."
+        },
+        "user": {
+            "getUser": {
+                "success": "User information retrieved successfully."
+            }
+        },
+        "validation": {
+            "email": "Please enter a valid email address.",
+            "password": "Please enter a password.",
+            "passwordLength": "Password must be at least {min} characters long.",
+            "passwordConfirm": "Passwords do not match."
+        },
+        "invalidInput": "Invalid input data.",
+        "serverError": "Server error occurred."
+    }
 }

@@ -1,4 +1,35 @@
 {
     "title": "안녕하세요",
-    "description": "이것은 한국어 페이지입니다."
+    "description": "이것은 한국어 페이지입니다.",
+    "api": {
+        "auth": {
+            "signIn": {
+                "success": "로그인에 성공했습니다.",
+                "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않습니다."
+            },
+            "signUp": {
+                "success": "회원가입이 완료되었습니다.",
+                "emailExists": "이미 사용 중인 이메일입니다."
+            },
+            "signOut": {
+                "success": "로그아웃 되었습니다."
+            },
+            "unauthorized": "인증이 필요합니다.",
+            "invalidSession": "유효하지 않은 세션입니다.",
+            "forbidden": "관리자 권한이 필요합니다."
+        },
+        "user": {
+            "getUser": {
+                "success": "회원정보 조회에 성공했습니다."
+            }
+        },
+        "validation": {
+            "email": "유효한 이메일을 입력해주세요.",
+            "password": "비밀번호를 입력해주세요.",
+            "passwordLength": "비밀번호는 최소 {min}자 이상이어야 합니다.",
+            "passwordConfirm": "비밀번호가 일치하지 않습니다."
+        },
+        "serverError": "서버 오류가 발생했습니다.",
+        "invalidInput": "입력 데이터가 유효하지 않습니다."
+    }
 }

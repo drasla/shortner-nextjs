@@ -6,4 +6,10 @@ model User {
   salt           String
   saltedPassword String
   isAdmin        Boolean  @default(false)
+  isActive       Boolean  @default(true)
+
+  sessions            Session[]
+  passwordResetTokens PasswordResetToken[]
+
+  @@map("users")
 }

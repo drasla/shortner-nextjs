@@ -113,6 +113,36 @@ Prisma.NullTypes = {
  * Enums
  */
 
+exports.Prisma.LoginAttemptScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  email: 'email',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  success: 'success'
+};
+
+exports.Prisma.PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt',
+  token: 'token',
+  email: 'email',
+  userId: 'userId',
+  used: 'used'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  expiresAt: 'expiresAt',
+  token: 'token',
+  userId: 'userId',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
@@ -120,7 +150,8 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   salt: 'salt',
   saltedPassword: 'saltedPassword',
-  isAdmin: 'isAdmin'
+  isAdmin: 'isAdmin',
+  isActive: 'isActive'
 };
 
 exports.Prisma.SortOrder = {
@@ -135,6 +166,9 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
+  LoginAttempt: 'LoginAttempt',
+  PasswordResetToken: 'PasswordResetToken',
+  Session: 'Session',
   User: 'User'
 };
 

@@ -1,10 +1,10 @@
-@import "tailwindcss";
+@import "../../node_modules/.pnpm/tailwindcss@4.1.11/node_modules/tailwindcss/dist/lib.d.mts";
 
 @layer base, theme, components, utilities;
 
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(base);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "../../node_modules/.pnpm/tailwindcss@4.1.11/node_modules/tailwindcss/theme.css" layer(theme);
+@import "../../node_modules/.pnpm/tailwindcss@4.1.11/node_modules/tailwindcss/preflight.css" layer(base);
+@import "../../node_modules/.pnpm/tailwindcss@4.1.11/node_modules/tailwindcss/utilities.css" layer(utilities);
 
 @source "../app";
 @source "../components";

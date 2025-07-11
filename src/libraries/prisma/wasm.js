@@ -113,15 +113,6 @@ Prisma.NullTypes = {
  * Enums
  */
 
-exports.Prisma.LoginAttemptScalarFieldEnum = {
-  id: 'id',
-  createdAt: 'createdAt',
-  email: 'email',
-  ipAddress: 'ipAddress',
-  userAgent: 'userAgent',
-  success: 'success'
-};
-
 exports.Prisma.PasswordResetTokenScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
@@ -168,7 +159,6 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  LoginAttempt: 'LoginAttempt',
   PasswordResetToken: 'PasswordResetToken',
   Session: 'Session',
   User: 'User'

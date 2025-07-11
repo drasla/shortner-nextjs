@@ -1,7 +1,7 @@
 {
     "title": "안녕하세요",
     "description": "이것은 한국어 페이지입니다.",
-    "api": {
+    "action": {
         "auth": {
             "signIn": {
                 "success": "로그인에 성공했습니다.",
@@ -16,21 +16,22 @@
             },
             "unauthorized": "인증이 필요합니다.",
             "invalidSession": "유효하지 않은 세션입니다.",
-            "forbidden": "관리자 권한이 필요합니다."
+            "forbidden": "접근 권한이 없습니다."
         },
         "user": {
             "getUser": {
                 "success": "회원정보 조회에 성공했습니다."
             }
         },
-        "validation": {
-            "email": "유효한 이메일을 입력해주세요.",
-            "password": "비밀번호를 입력해주세요.",
-            "passwordLength": "비밀번호는 최소 {min}자 이상이어야 합니다.",
-            "passwordConfirm": "비밀번호가 일치하지 않습니다."
-        },
         "serverError": "서버 오류가 발생했습니다.",
         "invalidInput": "입력 데이터가 유효하지 않습니다."
+    },
+    "validation": {
+        "required": "필수 입력 항목입니다.",
+        "email": "유효한 이메일 주소를 입력해주세요.",
+        "passwordLength": "비밀번호는 최소 {min}자 이상이어야 합니다.",
+        "passwordMatch": "비밀번호가 일치하지 않습니다.",
+        "emailExists": "이미 사용 중인 이메일 주소입니다."
     },
     "layout": {
         "header": {
@@ -40,6 +41,9 @@
         "language": {
             "en": "영어",
             "ko": "한국어"
+        },
+        "common": {
+            "loading": "로딩 중"
         }
     },
     "page": {
@@ -47,6 +51,21 @@
             "title": "URL을 빠르게 제공하기 위한 더 나은 방법",
             "description": "{siteName}은 URL을 단축하고 짧은 링크를 생성하는 도구입니다.",
             "placeholder": "주소를 줄일 URL을 입력해주세요."
+        },
+        "sign": {
+            "in": {
+                "title": "로그인",
+                "labelEmail": "이메일",
+                "labelPassword": "비밀번호",
+                "buttonText": "로그인"
+            },
+            "up": {
+                "title": "회원가입",
+                "labelEmail": "이메일",
+                "labelPassword": "비밀번호",
+                "labelConfirmPassword": "비밀번호 확인",
+                "buttonText": "회원가입"
+            }
         }
     }
 }

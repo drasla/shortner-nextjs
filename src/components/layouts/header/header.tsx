@@ -33,16 +33,20 @@ async function HeaderComponent() {
                         {process.env.SITE_NAME}
                     </Link>
                     <div className={twMerge(["flex", "justify-end", "items-center", "gap-3"])}>
-                        <Button
-                            className={twMerge(
-                                ["bg-white", "text-black"],
-                                ["rounded-full", "cursor-pointer"],
-                            )}>
-                            {t("layout.header.signUpButtonText")}
-                        </Button>
-                        <Button className={twMerge(["rounded-full", "cursor-pointer"])}>
-                            {t("layout.header.signInButtonText")}
-                        </Button>
+                        <Link href={"/sign/up"}>
+                            <Button
+                                className={twMerge(
+                                    ["bg-white", "text-black"],
+                                    ["rounded-full", "cursor-pointer"],
+                                )}>
+                                {t("layout.header.signUpButtonText")}
+                            </Button>
+                        </Link>
+                        <Link href={"/sign/in"}>
+                            <Button className={twMerge(["rounded-full", "cursor-pointer"])}>
+                                {t("layout.header.signInButtonText")}
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

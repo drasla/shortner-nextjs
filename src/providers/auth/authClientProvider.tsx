@@ -1,18 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type Props = {
     initializedUser: boolean;
 };
 
+type AuthContextType = {
+    isInitialized: boolean;
+    isLoading: boolean;
+};
+
+const AuthContext = createContext<AuthContextType>({
+    isInitialized: false,
+    isLoading: true,
+});
+
+export const useAuth = () => useContext(AuthContext);
+
 function AuthClientProvider({ initializedUser }: Props) {
     const [isLoading, setIsLoading] = useState<boolean>(!initializedUser);
-    const [error, setError] = useState<string | null>(null);
+    const [isInitialized, setIsInitialized] = useState<boolean>(initializedUser);
 
     useEffect(() => {
         if (initializedUser) {
             setIsLoading(false);
+            setIsInitialized(true);
             return;
         }
 
@@ -22,18 +35,22 @@ function AuthClientProvider({ initializedUser }: Props) {
             credentials: "include",
         })
             .then(response => {
-                if (!response.ok && response.status !== 204) {
+                if (!response.ok) {
                     throw new Error("Failed to initialize user");
                 }
-                setIsLoading(false);
+                return response.json();
             })
-            .catch(err => {
-                setError(err.message);
+            .then(data => {
                 setIsLoading(false);
+                setIsInitialized(data.success);
+            })
+            .catch(_ => {
+                setIsLoading(false);
+                setIsInitialized(false);
             });
     }, [initializedUser]);
 
-    return null;
+    return <AuthContext.Provider value={{ isInitialized, isLoading }}></AuthContext.Provider>;
 }
 
 export default AuthClientProvider;

@@ -1,7 +1,7 @@
 {
     "title": "Title",
     "description": "Description",
-    "api": {
+    "action": {
         "auth": {
             "signIn": {
                 "success": "Login successful.",
@@ -23,14 +23,15 @@
                 "success": "User information retrieved successfully."
             }
         },
-        "validation": {
-            "email": "Please enter a valid email address.",
-            "password": "Please enter a password.",
-            "passwordLength": "Password must be at least {min} characters long.",
-            "passwordConfirm": "Passwords do not match."
-        },
         "invalidInput": "Invalid input data.",
         "serverError": "Server error occurred."
+    },
+    "validation": {
+        "required": "This field is required",
+        "email": "Please enter a valid email address.",
+        "passwordLength": "Password must be at least {min} characters long.",
+        "passwordMatch": "Passwords do not match",
+        "emailExists": "Email is already in use"
     },
     "layout": {
         "header": {
@@ -40,6 +41,9 @@
         "language": {
             "en": "English",
             "ko": "Korean"
+        },
+        "common": {
+            "loading": "Loading"
         }
     },
     "page": {
@@ -47,6 +51,21 @@
             "title": "a better way to provide URLs quickly",
             "description": "{siteName} is a tool to shorten URLs and generate short links.",
             "placeholder": "Please enter the URL"
+        },
+        "sign": {
+            "in": {
+                "title": "Sign In",
+                "labelEmail": "Email",
+                "labelPassword": "Password",
+                "buttonText": "Sign In"
+            },
+            "up": {
+                "title": "Sign Up",
+                "labelEmail": "Email",
+                "labelPassword": "Password",
+                "labelConfirmPassword": "Confirm Password",
+                "buttonText": "Sign Up"
+            }
         }
     }
 }

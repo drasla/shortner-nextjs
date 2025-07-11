@@ -1,74 +1,76 @@
-import { cookies } from "next/headers";
-import PasswordHashUtility from "../../../../utilities/hash/hashUtility";
-import HashUtility from "../../../../utilities/hash/hashUtility";
-import { prisma } from "../../../../libraries/prisma/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "src/libraries/prisma/prisma";
+import HashUtility from "../../../../utilities/hash/hashUtility";
+import { v4 as uuidV4 } from "uuid";
+import { HeaderUtility } from "../../../../utilities/header/headerUtility";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export async function GET(request: NextRequest) {
     try {
-        const cookieValue = request.cookies.get("hashed-id")?.value;
+        const sessionToken = request.cookies.get("session_token")?.value;
 
-        if (cookieValue) {
-            try {
-                const user = await prisma.user.findUnique({
-                    where: { hashedId: cookieValue },
-                });
+        if (sessionToken) {
+            const session = await prisma.session.findUnique({
+                where: { token: sessionToken },
+                include: { user: true },
+            });
 
-                if (user) {
-                    return new NextResponse(null, { status: 204 });
-                }
-            } catch (findError) {
-                console.error("Error finding user:", findError);
+            if (session && session.user.isActive && session.expiresAt > new Date()) {
+                return NextResponse.json({ success: true, isNewUser: false }, { status: 200 });
             }
         }
 
-        const salt = PasswordHashUtility.createSalt();
+        const salt = HashUtility.createSalt();
         const tempHashedId = HashUtility.hashValue("temp", salt);
 
         const user = await prisma.user.create({
             data: {
                 salt,
-                hashedId: tempHashedId, // 임시 값 사용
+                hashedId: tempHashedId,
                 isAnonymous: true,
+                isActive: true,
             },
         });
 
-        const mongoId = user.id;
-        const hashedId = HashUtility.hashValue(mongoId, salt);
+        const userId = user.id;
+        const hashedId = HashUtility.hashValue(userId, salt);
 
         await prisma.user.update({
-            where: { id: mongoId },
+            where: { id: userId },
+            data: { hashedId },
+        });
+
+        const token = uuidV4();
+        const expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + 30);
+
+        const userAgent = HeaderUtility.getUserAgentFromRequest(request);
+        const ipAddress = HeaderUtility.getClientIPFromRequest(request);
+
+        await prisma.session.create({
             data: {
-                hashedId,
+                token,
+                userId,
+                expiresAt,
+                userAgent,
+                ipAddress,
             },
         });
 
-        (await cookies()).set({
-            name: "hashed-id",
-            value: hashedId,
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+        const response = NextResponse.json({ success: true, isNewUser: true }, { status: 201 });
+
+        response.cookies.set({
+            name: "session_token",
+            value: token,
+            httpOnly: process.env.NODE_ENV === "production",
             sameSite: "lax",
-            path: "/",
-            maxAge: 60 * 60 * 24 * 365,
+            expires: expiresAt,
         });
 
-        return NextResponse.json(null, { status: 201 });
-    } catch (e) {
-        console.error("User initialization error:", e);
-        console.error("Error stack:", e instanceof Error ? e.stack : "No stack trace");
-
-        return NextResponse.json(
-            {
-                error: "Failed to initialize user.",
-                details:
-                    process.env.NODE_ENV === "development"
-                        ? e instanceof Error
-                            ? e.message
-                            : String(e)
-                        : undefined,
-            },
-            { status: 500 },
-        );
+        return response;
+    } catch {
+        const locale = await getLocale();
+        const t = await getTranslations({ locale });
+        return NextResponse.json({ success: false, error: t("action.serverError") });
     }
 }

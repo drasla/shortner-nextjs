@@ -1,4 +1,4 @@
-import messages from "../../i18n/messages/en.json";
+import messages from "../../i18n/intl/messages/en.json";
 
 export const locales = ["en", "ko"] as const;
 export type Locale = (typeof locales)[number];

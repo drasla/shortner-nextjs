@@ -4,13 +4,14 @@
     "description": "",
     "main": "dist/index.js",
     "scripts": {
-        "dev": "NODE_OPTIONS='--inspect' PORT=50011 next dev --turbopack",
+        "dev": "NEXT_RUNTIME_MIDDLEWARE_DEBUG=1 NODE_OPTIONS='--inspect' PORT=50011 next dev --turbopack",
         "merge:prisma": "ts-node scripts/mergePrisma.ts",
         "generate:prisma": "dotenv -e .env.development -- pnpm run merge:prisma && prisma generate",
         "studio:prisma": "dotenv -e .env.development -- prisma studio",
         "build": "next build"
     },
     "dependencies": {
+        "@drasla/nextjs-theme-kit": "^0.1.5",
         "@prisma/client": "^6.11.1",
         "dayjs": "^1.11.13",
         "decimal.js": "^10.6.0",

@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const isPasswordValid = PasswordHashUtility.verifyPassword(
+        const isPasswordValid = PasswordHashUtility.verifyValue(
             password,
             user.salt,
             user.saltedPassword,

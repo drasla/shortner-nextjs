@@ -31,5 +31,22 @@
         },
         "invalidInput": "Invalid input data.",
         "serverError": "Server error occurred."
+    },
+    "layout": {
+        "header": {
+            "signUpButtonText": "Create a free account",
+            "signInButtonText": "SIgnIn"
+        },
+        "language": {
+            "en": "English",
+            "ko": "Korean"
+        }
+    },
+    "page": {
+        "home": {
+            "title": "a better way to provide URLs quickly",
+            "description": "{siteName} is a tool to shorten URLs and generate short links.",
+            "placeholder": "Please enter the URL"
+        }
     }
 }

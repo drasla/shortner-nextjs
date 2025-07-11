@@ -1,42 +1,50 @@
 import { twMerge } from "tailwind-merge";
-import { TbMenu2 } from "react-icons/tb";
+import { Button } from "@drasla/nextjs-theme-kit";
+import { getLocale, getTranslations } from "next-intl/server";
+import Link from "next/link";
 
-function HeaderComponent() {
+async function HeaderComponent() {
+    const locale = await getLocale();
+    const t = await getTranslations({ locale });
+
     return (
         <header
-            className={twMerge(
-                ["sticky", "top-0", "w-full", "h-header", "px-4"],
-                ["flex", "justify-between", "items-center"],
-                ["bg-primary-main", "text-theme-text"],
-            )}>
-            <div className={twMerge(["flex", "items-center"])}>
-                <div
-                    className={twMerge(
-                        ["p-4"],
-                        ["flex", "justify-center", "items-center"],
-                        ["cursor-pointer"],
-                    )}>
-                    <TbMenu2 size={20} />
+            className={twMerge([
+                "sticky",
+                "top-0",
+                "w-full",
+                "h-header",
+                "px-4",
+                "bg-light-paper",
+            ])}>
+            <div
+                className={twMerge(
+                    ["w-full", "max-w-7xl", "mx-auto", "h-header"],
+                    ["flex", "items-center"],
+                )}>
+                <div className={twMerge(["w-full"], ["flex", "justify-between", "items-center"])}>
+                    <Link
+                        href={"/"}
+                        className={twMerge([
+                            "[font-family:var(--font-logo)]",
+                            "font-bold",
+                            "text-2xl",
+                        ])}>
+                        {process.env.SITE_NAME}
+                    </Link>
+                    <div className={twMerge(["flex", "justify-end", "items-center", "gap-3"])}>
+                        <Button
+                            className={twMerge(
+                                ["bg-white", "text-black"],
+                                ["rounded-full", "cursor-pointer"],
+                            )}>
+                            {t("layout.header.signUpButtonText")}
+                        </Button>
+                        <Button className={twMerge(["rounded-full", "cursor-pointer"])}>
+                            {t("layout.header.signInButtonText")}
+                        </Button>
+                    </div>
                 </div>
-                <div className={twMerge(["w-40"])}>Getflix</div>
-            </div>
-            <div className={twMerge(["flex", "justify-end", "items-center", "gap-3"])}>
-                <button
-                    className={twMerge(
-                        ["px-5", "py-1.5", "rounded-full"],
-                        ["bg-white", "text-black"],
-                        ["cursor-pointer"],
-                    )}>
-                    무료 계정 만들기
-                </button>
-                <button
-                    className={twMerge(
-                        ["px-5", "py-1.5"],
-                        ["rounded-full", "border", "border-theme-text"],
-                        ["cursor-pointer"],
-                    )}>
-                    로그인
-                </button>
             </div>
         </header>
     );

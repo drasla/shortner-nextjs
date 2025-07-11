@@ -31,5 +31,22 @@
         },
         "serverError": "서버 오류가 발생했습니다.",
         "invalidInput": "입력 데이터가 유효하지 않습니다."
+    },
+    "layout": {
+        "header": {
+            "signUpButtonText": "무료 계정 만들기",
+            "signInButtonText": "로그인"
+        },
+        "language": {
+            "en": "영어",
+            "ko": "한국어"
+        }
+    },
+    "page": {
+        "home": {
+            "title": "URL을 빠르게 제공하기 위한 더 나은 방법",
+            "description": "{siteName}은 URL을 단축하고 짧은 링크를 생성하는 도구입니다.",
+            "placeholder": "주소를 줄일 URL을 입력해주세요."
+        }
     }
 }

@@ -5,7 +5,7 @@ async function getRequestConfig() {
     const localeCookie = cookieStore.get("NEXT_LOCALE")?.value;
 
     const locales = ["en", "ko"];
-    const defaultLocale = "ko";
+    const defaultLocale = "en";
     // locale 지정
     let locale = localeCookie && locales.includes(localeCookie) ? localeCookie : defaultLocale;
 

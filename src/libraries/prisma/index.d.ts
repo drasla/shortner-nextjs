@@ -4105,10 +4105,12 @@ export namespace Prisma {
     id: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    hashedId: string | null
     email: string | null
     salt: string | null
-    saltedPassword: string | null
+    hashedPassword: string | null
     isAdmin: boolean | null
+    isAnonymous: boolean | null
     isActive: boolean | null
   }
 
@@ -4116,10 +4118,12 @@ export namespace Prisma {
     id: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    hashedId: string | null
     email: string | null
     salt: string | null
-    saltedPassword: string | null
+    hashedPassword: string | null
     isAdmin: boolean | null
+    isAnonymous: boolean | null
     isActive: boolean | null
   }
 
@@ -4127,10 +4131,12 @@ export namespace Prisma {
     id: number
     createdAt: number
     updatedAt: number
+    hashedId: number
     email: number
     salt: number
-    saltedPassword: number
+    hashedPassword: number
     isAdmin: number
+    isAnonymous: number
     isActive: number
     _all: number
   }
@@ -4140,10 +4146,12 @@ export namespace Prisma {
     id?: true
     createdAt?: true
     updatedAt?: true
+    hashedId?: true
     email?: true
     salt?: true
-    saltedPassword?: true
+    hashedPassword?: true
     isAdmin?: true
+    isAnonymous?: true
     isActive?: true
   }
 
@@ -4151,10 +4159,12 @@ export namespace Prisma {
     id?: true
     createdAt?: true
     updatedAt?: true
+    hashedId?: true
     email?: true
     salt?: true
-    saltedPassword?: true
+    hashedPassword?: true
     isAdmin?: true
+    isAnonymous?: true
     isActive?: true
   }
 
@@ -4162,10 +4172,12 @@ export namespace Prisma {
     id?: true
     createdAt?: true
     updatedAt?: true
+    hashedId?: true
     email?: true
     salt?: true
-    saltedPassword?: true
+    hashedPassword?: true
     isAdmin?: true
+    isAnonymous?: true
     isActive?: true
     _all?: true
   }
@@ -4246,10 +4258,12 @@ export namespace Prisma {
     id: string
     createdAt: Date
     updatedAt: Date
-    email: string
+    hashedId: string
+    email: string | null
     salt: string
-    saltedPassword: string
+    hashedPassword: string | null
     isAdmin: boolean
+    isAnonymous: boolean
     isActive: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -4274,10 +4288,12 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    hashedId?: boolean
     email?: boolean
     salt?: boolean
-    saltedPassword?: boolean
+    hashedPassword?: boolean
     isAdmin?: boolean
+    isAnonymous?: boolean
     isActive?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     passwordResetTokens?: boolean | User$passwordResetTokensArgs<ExtArgs>
@@ -4290,14 +4306,16 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    hashedId?: boolean
     email?: boolean
     salt?: boolean
-    saltedPassword?: boolean
+    hashedPassword?: boolean
     isAdmin?: boolean
+    isAnonymous?: boolean
     isActive?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "email" | "salt" | "saltedPassword" | "isAdmin" | "isActive", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "hashedId" | "email" | "salt" | "hashedPassword" | "isAdmin" | "isAnonymous" | "isActive", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     passwordResetTokens?: boolean | User$passwordResetTokensArgs<ExtArgs>
@@ -4314,10 +4332,12 @@ export namespace Prisma {
       id: string
       createdAt: Date
       updatedAt: Date
-      email: string
+      hashedId: string
+      email: string | null
       salt: string
-      saltedPassword: string
+      hashedPassword: string | null
       isAdmin: boolean
+      isAnonymous: boolean
       isActive: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -4716,10 +4736,12 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly hashedId: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly salt: FieldRef<"User", 'String'>
-    readonly saltedPassword: FieldRef<"User", 'String'>
+    readonly hashedPassword: FieldRef<"User", 'String'>
     readonly isAdmin: FieldRef<"User", 'Boolean'>
+    readonly isAnonymous: FieldRef<"User", 'Boolean'>
     readonly isActive: FieldRef<"User", 'Boolean'>
   }
     
@@ -5204,10 +5226,12 @@ export namespace Prisma {
     id: 'id',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    hashedId: 'hashedId',
     email: 'email',
     salt: 'salt',
-    saltedPassword: 'saltedPassword',
+    hashedPassword: 'hashedPassword',
     isAdmin: 'isAdmin',
+    isAnonymous: 'isAnonymous',
     isActive: 'isActive'
   };
 
@@ -5486,10 +5510,12 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    email?: StringFilter<"User"> | string
+    hashedId?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
     salt?: StringFilter<"User"> | string
-    saltedPassword?: StringFilter<"User"> | string
+    hashedPassword?: StringNullableFilter<"User"> | string | null
     isAdmin?: BoolFilter<"User"> | boolean
+    isAnonymous?: BoolFilter<"User"> | boolean
     isActive?: BoolFilter<"User"> | boolean
     sessions?: SessionListRelationFilter
     passwordResetTokens?: PasswordResetTokenListRelationFilter
@@ -5499,10 +5525,12 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    hashedId?: SortOrder
     email?: SortOrder
     salt?: SortOrder
-    saltedPassword?: SortOrder
+    hashedPassword?: SortOrder
     isAdmin?: SortOrder
+    isAnonymous?: SortOrder
     isActive?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     passwordResetTokens?: PasswordResetTokenOrderByRelationAggregateInput
@@ -5510,6 +5538,7 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    hashedId?: string
     email?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -5517,21 +5546,24 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     salt?: StringFilter<"User"> | string
-    saltedPassword?: StringFilter<"User"> | string
+    hashedPassword?: StringNullableFilter<"User"> | string | null
     isAdmin?: BoolFilter<"User"> | boolean
+    isAnonymous?: BoolFilter<"User"> | boolean
     isActive?: BoolFilter<"User"> | boolean
     sessions?: SessionListRelationFilter
     passwordResetTokens?: PasswordResetTokenListRelationFilter
-  }, "id" | "email">
+  }, "id" | "hashedId" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    hashedId?: SortOrder
     email?: SortOrder
     salt?: SortOrder
-    saltedPassword?: SortOrder
+    hashedPassword?: SortOrder
     isAdmin?: SortOrder
+    isAnonymous?: SortOrder
     isActive?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -5545,10 +5577,12 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    email?: StringWithAggregatesFilter<"User"> | string
+    hashedId?: StringWithAggregatesFilter<"User"> | string
+    email?: StringNullableWithAggregatesFilter<"User"> | string | null
     salt?: StringWithAggregatesFilter<"User"> | string
-    saltedPassword?: StringWithAggregatesFilter<"User"> | string
+    hashedPassword?: StringNullableWithAggregatesFilter<"User"> | string | null
     isAdmin?: BoolWithAggregatesFilter<"User"> | boolean
+    isAnonymous?: BoolWithAggregatesFilter<"User"> | boolean
     isActive?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
@@ -5752,10 +5786,12 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email: string
+    hashedId: string
+    email?: string | null
     salt: string
-    saltedPassword: string
+    hashedPassword?: string | null
     isAdmin?: boolean
+    isAnonymous?: boolean
     isActive?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -5765,10 +5801,12 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email: string
+    hashedId: string
+    email?: string | null
     salt: string
-    saltedPassword: string
+    hashedPassword?: string | null
     isAdmin?: boolean
+    isAnonymous?: boolean
     isActive?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -5777,10 +5815,12 @@ export namespace Prisma {
   export type UserUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
+    hashedId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
-    saltedPassword?: StringFieldUpdateOperationsInput | string
+    hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -5789,10 +5829,12 @@ export namespace Prisma {
   export type UserUncheckedUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
+    hashedId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
-    saltedPassword?: StringFieldUpdateOperationsInput | string
+    hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -5802,30 +5844,36 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email: string
+    hashedId: string
+    email?: string | null
     salt: string
-    saltedPassword: string
+    hashedPassword?: string | null
     isAdmin?: boolean
+    isAnonymous?: boolean
     isActive?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
+    hashedId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
-    saltedPassword?: StringFieldUpdateOperationsInput | string
+    hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
+    hashedId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
-    saltedPassword?: StringFieldUpdateOperationsInput | string
+    hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -6054,10 +6102,12 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    hashedId?: SortOrder
     email?: SortOrder
     salt?: SortOrder
-    saltedPassword?: SortOrder
+    hashedPassword?: SortOrder
     isAdmin?: SortOrder
+    isAnonymous?: SortOrder
     isActive?: SortOrder
   }
 
@@ -6065,10 +6115,12 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    hashedId?: SortOrder
     email?: SortOrder
     salt?: SortOrder
-    saltedPassword?: SortOrder
+    hashedPassword?: SortOrder
     isAdmin?: SortOrder
+    isAnonymous?: SortOrder
     isActive?: SortOrder
   }
 
@@ -6076,10 +6128,12 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    hashedId?: SortOrder
     email?: SortOrder
     salt?: SortOrder
-    saltedPassword?: SortOrder
+    hashedPassword?: SortOrder
     isAdmin?: SortOrder
+    isAnonymous?: SortOrder
     isActive?: SortOrder
   }
 
@@ -6341,10 +6395,12 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email: string
+    hashedId: string
+    email?: string | null
     salt: string
-    saltedPassword: string
+    hashedPassword?: string | null
     isAdmin?: boolean
+    isAnonymous?: boolean
     isActive?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
   }
@@ -6353,10 +6409,12 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email: string
+    hashedId: string
+    email?: string | null
     salt: string
-    saltedPassword: string
+    hashedPassword?: string | null
     isAdmin?: boolean
+    isAnonymous?: boolean
     isActive?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
@@ -6380,10 +6438,12 @@ export namespace Prisma {
   export type UserUpdateWithoutPasswordResetTokensInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
+    hashedId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
-    saltedPassword?: StringFieldUpdateOperationsInput | string
+    hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
   }
@@ -6391,10 +6451,12 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
+    hashedId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
-    saltedPassword?: StringFieldUpdateOperationsInput | string
+    hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -6403,10 +6465,12 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email: string
+    hashedId: string
+    email?: string | null
     salt: string
-    saltedPassword: string
+    hashedPassword?: string | null
     isAdmin?: boolean
+    isAnonymous?: boolean
     isActive?: boolean
     passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
   }
@@ -6415,10 +6479,12 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email: string
+    hashedId: string
+    email?: string | null
     salt: string
-    saltedPassword: string
+    hashedPassword?: string | null
     isAdmin?: boolean
+    isAnonymous?: boolean
     isActive?: boolean
     passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   }
@@ -6442,10 +6508,12 @@ export namespace Prisma {
   export type UserUpdateWithoutSessionsInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
+    hashedId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
-    saltedPassword?: StringFieldUpdateOperationsInput | string
+    hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
   }
@@ -6453,10 +6521,12 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutSessionsInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
+    hashedId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     salt?: StringFieldUpdateOperationsInput | string
-    saltedPassword?: StringFieldUpdateOperationsInput | string
+    hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   }

@@ -36,7 +36,8 @@
     "layout": {
         "header": {
             "signUpButtonText": "Create a free account",
-            "signInButtonText": "SIgnIn"
+            "signInButtonText": "SignIn",
+            "signOutButtonText": "Logout"
         },
         "language": {
             "en": "English",
@@ -54,13 +55,13 @@
         },
         "sign": {
             "in": {
-                "title": "Sign In",
+                "title": "Sign In to Your Account",
                 "labelEmail": "Email",
                 "labelPassword": "Password",
                 "buttonText": "Sign In"
             },
             "up": {
-                "title": "Sign Up",
+                "title": "Create an Account",
                 "labelEmail": "Email",
                 "labelPassword": "Password",
                 "labelConfirmPassword": "Confirm Password",

@@ -36,7 +36,8 @@
     "layout": {
         "header": {
             "signUpButtonText": "무료 계정 만들기",
-            "signInButtonText": "로그인"
+            "signInButtonText": "로그인",
+            "signOutButtonText": "로그아웃"
         },
         "language": {
             "en": "영어",

@@ -1,8 +1,7 @@
 export type UserData = {
     id: string;
-    email: string;
+    email: string | null;
+    isAnonymous: boolean;
     isAdmin: boolean;
-    isActive: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    hashedId: string;
 };

@@ -1,15 +1,11 @@
-import { PropsWithChildren } from "react";
 import AuthClientProvider from "./authClientProvider";
+import { PropsWithChildren } from "react";
 
-type Props = {
-    initializedUser: boolean;
-} & PropsWithChildren;
-
-function AuthProvider({ initializedUser, children }: Props) {
+function AuthProvider({ children }: PropsWithChildren) {
     return (
         <>
             {children}
-            <AuthClientProvider initializedUser={initializedUser}/>
+            <AuthClientProvider />
         </>
     );
 }

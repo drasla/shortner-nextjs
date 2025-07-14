@@ -1,5 +1,4 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import LanguageSwitcher from "./swith-language";
 import { twMerge } from "tailwind-merge";
 import "../styles/rootPage.css";
 import Image from "next/image";
@@ -36,11 +35,6 @@ async function RootPage() {
                         />
                     </div>
                 </div>
-            </div>
-            <div>
-                <h1>{t("title")}</h1>
-                <p>{t("description")}</p>
-                <LanguageSwitcher />
             </div>
         </>
     );

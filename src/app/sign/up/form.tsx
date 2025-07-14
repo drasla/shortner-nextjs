@@ -2,18 +2,19 @@
 
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { createZodSchema } from "../../../utilities/zod/helper";
+import { useForm } from "react-hook-form";
+import { SignUpInput, SignUpSchema } from "../../../actions/sign/up/signUpSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { twMerge } from "tailwind-merge";
 import { Button, Input } from "@drasla/nextjs-theme-kit";
-import { useForm } from "react-hook-form";
-import { SignInInput, SignInSchema } from "../../../actions/sign/in/signInSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createZodSchema } from "../../../utilities/zod/helper";
+import SignUpAction from "../../../actions/sign/up/signUpAction";
 
-function SignInForm() {
+function SignUpForm() {
     const router = useRouter();
 
     const t = useTranslations();
-    const signInSchema = createZodSchema(t, SignInSchema);
+    const signUpSchema = createZodSchema(t, SignUpSchema);
 
     const {
         register,
@@ -23,40 +24,27 @@ function SignInForm() {
         setError,
         clearErrors,
         formState: { errors, isSubmitting },
-    } = useForm<SignInInput>({
-        resolver: zodResolver(signInSchema),
+    } = useForm<SignUpInput>({
+        resolver: zodResolver(signUpSchema),
         defaultValues: {
             email: "",
             password: "",
+            confirm: "",
         },
         mode: "onSubmit",
         reValidateMode: "onChange",
     });
 
-    const onSubmit = async (data: SignInInput) => {
+    const onSubmit = async (data: SignUpInput) => {
         try {
-            const response = await fetch("/api/user/in", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-                credentials: "include",
-            });
+            const result = await SignUpAction(data);
 
-            const responseData = await response.json();
-
-            if (!response.ok) {
-                setError("root", { message: responseData.error || t("action.serverError") });
+            if ("error" in result) {
+                setError("root", { message: result.error });
                 return;
             }
 
-            if (responseData.success) {
-                router.push("/");
-                window.location.href = "/";
-            } else {
-                setError("root", { message: responseData.error || t("action.serverError") });
-            }
+            router.push("/sign/in");
         } catch {
             setError("root", { message: t("action.serverError") });
         }
@@ -71,12 +59,12 @@ function SignInForm() {
             )}
             onSubmit={handleSubmit(onSubmit)}>
             <div className={twMerge("text-2xl", "font-bold", "mb-10")}>
-                {t("page.sign.in.title")}
+                {t("page.sign.up.title")}
             </div>
             <Input
                 {...register("email")}
                 fullWidth={true}
-                label={t("page.sign.in.labelEmail")}
+                label={t("page.sign.up.labelEmail")}
                 size={"large"}
                 error={errors.email?.message}
                 value={watch("email")}
@@ -89,7 +77,7 @@ function SignInForm() {
             <Input
                 {...register("password")}
                 fullWidth={true}
-                label={t("page.sign.in.labelPassword")}
+                label={t("page.sign.up.labelPassword")}
                 type={"password"}
                 size={"large"}
                 error={errors.password?.message}
@@ -100,6 +88,21 @@ function SignInForm() {
                     setValue("password", e.target.value);
                 }}
             />
+            <Input
+                className={twMerge(["mb-10"])}
+                {...register("confirm")}
+                fullWidth={true}
+                label={t("page.sign.up.labelConfirmPassword")}
+                type={"password"}
+                size={"large"}
+                error={errors.confirm?.message}
+                value={watch("confirm")}
+                onChange={e => {
+                    clearErrors("root");
+                    clearErrors("confirm");
+                    setValue("confirm", e.target.value);
+                }}
+            />
             {errors.root && (
                 <div className={twMerge(["mt-10"], ["text-error-main", "text-sm", "text-center"])}>
                     {errors.root.message}
@@ -108,13 +111,13 @@ function SignInForm() {
             <Button
                 type={"submit"}
                 size={"large"}
-                className={twMerge("w-full", "mt-10")}
+                className={twMerge("w-full")}
                 loading={isSubmitting}
                 disabled={isSubmitting}>
-                {t("page.sign.in.buttonText")}
+                {t("page.sign.up.buttonText")}
             </Button>
         </form>
     );
 }
 
-export default SignInForm;
+export default SignUpForm;

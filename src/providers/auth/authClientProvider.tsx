@@ -1,56 +1,50 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-
-type Props = {
-    initializedUser: boolean;
-};
+import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
+import { UserData } from "../../types/userData";
 
 type AuthContextType = {
-    isInitialized: boolean;
+    user: UserData | null;
     isLoading: boolean;
 };
 
 const AuthContext = createContext<AuthContextType>({
-    isInitialized: false,
+    user: null,
     isLoading: true,
 });
 
 export const useAuth = () => useContext(AuthContext);
 
-function AuthClientProvider({ initializedUser }: Props) {
-    const [isLoading, setIsLoading] = useState<boolean>(!initializedUser);
-    const [isInitialized, setIsInitialized] = useState<boolean>(initializedUser);
+function AuthClientProvider({ children }: PropsWithChildren) {
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [user, setUser] = useState<UserData | null>(null);
 
     useEffect(() => {
-        if (initializedUser) {
-            setIsLoading(false);
-            setIsInitialized(true);
-            return;
-        }
+        const fetchUser = async () => {
+            try {
+                const res = await fetch("/api/user/init", {
+                    method: "GET",
+                    credentials: "include",
+                });
 
-        setIsLoading(true);
-        fetch("/api/user/init", {
-            method: "GET",
-            credentials: "include",
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Failed to initialize user");
+                const data = await res.json();
+
+                if (data.success && data.user) {
+                    setUser(data.user);
+                } else {
+                    setUser(null);
                 }
-                return response.json();
-            })
-            .then(data => {
+            } catch {
+                setUser(null);
+            } finally {
                 setIsLoading(false);
-                setIsInitialized(data.success);
-            })
-            .catch(_ => {
-                setIsLoading(false);
-                setIsInitialized(false);
-            });
-    }, [initializedUser]);
+            }
+        };
 
-    return <AuthContext.Provider value={{ isInitialized, isLoading }}></AuthContext.Provider>;
+        fetchUser();
+    }, []);
+
+    return <AuthContext.Provider value={{ user, isLoading }}>{children}</AuthContext.Provider>;
 }
 
 export default AuthClientProvider;

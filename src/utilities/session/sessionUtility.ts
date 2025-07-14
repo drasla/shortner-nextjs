@@ -1,14 +1,14 @@
 import { NextRequest } from "next/server";
 import { v4 as uuidV4 } from "uuid";
 import { HeaderUtility } from "../header/headerUtility";
-import { SessionData } from "../../types/sessionData";
 import { prisma } from "../../libraries/prisma/prisma";
+import { Session } from "src/libraries/prisma";
 
 export class SessionUtility {
     static async createSession(userId: string, request: NextRequest, rememberMe: boolean = false) {
         const token = uuidV4();
-        const clientIP = HeaderUtility.getClientIP(request);
-        const userAgent = HeaderUtility.getUserAgent(request);
+        const clientIP = HeaderUtility.getClientIPFromRequest(request);
+        const userAgent = HeaderUtility.getUserAgentFromRequest(request);
 
         const expiresAt = new Date();
         if (rememberMe) {
@@ -28,7 +28,7 @@ export class SessionUtility {
         });
     }
 
-    static async validateSession(token: string): Promise<SessionData | null> {
+    static async validateSession(token: string): Promise<Session | null> {
         const session = await prisma.session.findUnique({
             where: { token },
             include: {

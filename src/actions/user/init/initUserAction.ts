@@ -7,11 +7,7 @@ import HashUtility from "../../../utilities/hash/hashUtility";
 import { v4 as uuidV4 } from "uuid";
 import { HeaderUtility } from "../../../utilities/header/headerUtility";
 
-async function InitUserAction(): Promise<{
-    user: UserData | null;
-    token: string | null;
-    expiresAt?: Date;
-}> {
+async function InitUserAction(): Promise<UserData | null> {
     try {
         const cookieStore = await cookies();
         const sessionToken = cookieStore.get("session_token")?.value;
@@ -24,7 +20,7 @@ async function InitUserAction(): Promise<{
 
             if (session && session.user.isActive && session.expiresAt > new Date()) {
                 const { id, email, isAnonymous, isAdmin, hashedId }: UserData = session.user;
-                return { user: { id, email, isAnonymous, isAdmin, hashedId }, token: null };
+                return { id, email, isAnonymous, isAdmin, hashedId };
             }
         }
 
@@ -60,19 +56,25 @@ async function InitUserAction(): Promise<{
             },
         });
 
+        cookieStore.set({
+            name: "session_token",
+            value: token,
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            expires: expiresAt,
+            path: "/",
+        });
+
         return {
-            user: {
-                id: newUser.id,
-                email: null,
-                isAnonymous: true,
-                isAdmin: false,
-                hashedId,
-            },
-            token,
-            expiresAt,
+            id: newUser.id,
+            email: null,
+            isAnonymous: true,
+            isAdmin: false,
+            hashedId,
         };
     } catch {
-        return { user: null, token: null };
+        return null;
     }
 }
 

@@ -2,8 +2,10 @@ import { twMerge } from "tailwind-merge";
 import Link from "next/link";
 import LanguageSelect from "./languageSelect";
 import HeaderClient from "./client";
+import InitUserAction from "../../../actions/user/init/initUserAction";
 
 async function HeaderComponent() {
+    const user = await InitUserAction();
 
     return (
         <header
@@ -32,7 +34,7 @@ async function HeaderComponent() {
                     </Link>
                     <div className={twMerge(["flex", "justify-end", "items-center", "gap-3"])}>
                         <LanguageSelect />
-                        <HeaderClient />
+                        <HeaderClient user={user} />
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import HeaderComponent from "../components/layouts/header/header";
 import { HTML, Layout } from "@drasla/nextjs-theme-kit";
-import AuthClientProvider from "../providers/auth/authClientProvider";
+import InitUserAction from "../actions/user/init/initUserAction";
 
 export const viewport: Viewport = {
     width: "device-width",
@@ -13,15 +13,15 @@ export const viewport: Viewport = {
 };
 
 async function RootLayout({ children }: PropsWithChildren) {
+    await InitUserAction();
+
     const locale = await getLocale();
     const messages = await getMessages();
 
     return (
         <HTML lang={locale}>
             <NextIntlClientProvider locale={locale} messages={messages}>
-                <AuthClientProvider>
-                    <Layout header={<HeaderComponent />}>{children}</Layout>
-                </AuthClientProvider>
+                <Layout header={<HeaderComponent />}>{children}</Layout>
             </NextIntlClientProvider>
         </HTML>
     );

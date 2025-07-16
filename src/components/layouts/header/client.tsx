@@ -1,16 +1,19 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useAuth } from "../../../providers/auth/authClientProvider";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { Button } from "@drasla/nextjs-theme-kit";
 import { useRouter } from "next/navigation";
+import { UserData } from "../../../types/userData";
 
-function HeaderClient() {
+type Props = {
+    user: UserData | null;
+}
+
+function HeaderClient({ user }: Props) {
     const router = useRouter();
     const t = useTranslations();
-    const { user, isLoading } = useAuth();
 
     const handleLogout = async () => {
         try {
@@ -29,11 +32,9 @@ function HeaderClient() {
         }
     };
 
-    if (isLoading) return <></>;
-
     return (
         <>
-            {!isLoading && user?.isAnonymous === false ? (
+            {user?.isAnonymous === false ? (
                 <>
                     <Button type={"button"} onClick={handleLogout}>
                         {t("layout.header.signOutButtonText")}

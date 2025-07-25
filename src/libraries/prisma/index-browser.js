@@ -113,6 +113,35 @@ Prisma.NullTypes = {
  * Enums
  */
 
+exports.Prisma.BrowserStatScalarFieldEnum = {
+  id: 'id',
+  browser: 'browser',
+  count: 'count',
+  shortUrlId: 'shortUrlId'
+};
+
+exports.Prisma.DailyStatScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  count: 'count',
+  shortUrlId: 'shortUrlId'
+};
+
+exports.Prisma.DeviceOsStatScalarFieldEnum = {
+  id: 'id',
+  device: 'device',
+  os: 'os',
+  count: 'count',
+  shortUrlId: 'shortUrlId'
+};
+
+exports.Prisma.HourlyStatScalarFieldEnum = {
+  id: 'id',
+  hour: 'hour',
+  count: 'count',
+  shortUrlId: 'shortUrlId'
+};
+
 exports.Prisma.PasswordResetTokenScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
@@ -134,6 +163,15 @@ exports.Prisma.SessionScalarFieldEnum = {
   userAgent: 'userAgent'
 };
 
+exports.Prisma.ShortUrlScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  shortCode: 'shortCode',
+  originalUrl: 'originalUrl',
+  clicks: 'clicks',
+  userId: 'userId'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
@@ -145,6 +183,15 @@ exports.Prisma.UserScalarFieldEnum = {
   isAdmin: 'isAdmin',
   isAnonymous: 'isAnonymous',
   isActive: 'isActive'
+};
+
+exports.Prisma.VisitLogScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  shortUrlId: 'shortUrlId',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  referrer: 'referrer'
 };
 
 exports.Prisma.SortOrder = {
@@ -159,9 +206,15 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
+  BrowserStat: 'BrowserStat',
+  DailyStat: 'DailyStat',
+  DeviceOsStat: 'DeviceOsStat',
+  HourlyStat: 'HourlyStat',
   PasswordResetToken: 'PasswordResetToken',
   Session: 'Session',
-  User: 'User'
+  ShortUrl: 'ShortUrl',
+  User: 'User',
+  VisitLog: 'VisitLog'
 };
 
 /**

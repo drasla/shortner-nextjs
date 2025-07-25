@@ -16,6 +16,51 @@ datasource db {
 
 // --- MODELS ---
 
+model BrowserStat {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  browser String
+  count   Int    @default(0)
+
+  shortUrlId String
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+
+  @@unique([shortUrlId, browser])
+}
+
+model DailyStat {
+  id    String   @id @default(auto()) @map("_id") @db.ObjectId
+  date  DateTime
+  count Int      @default(0)
+
+  shortUrlId String
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+
+  @@unique([shortUrlId, date])
+}
+
+model DeviceOsStat {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  device String
+  os     String
+  count  Int    @default(0)
+
+  shortUrlId String
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+
+  @@unique([shortUrlId, device, os])
+}
+
+model HourlyStat {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  hour  Int
+  count Int    @default(0)
+
+  shortUrlId String
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+
+  @@unique([shortUrlId, hour])
+}
+
 model PasswordResetToken {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
@@ -47,6 +92,26 @@ model Session {
   @@map("sessions")
 }
 
+model ShortUrl {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+
+  shortCode   String @unique
+  originalUrl String
+  clicks      Int    @default(0)
+
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+
+  visits        VisitLog[]
+  dailyStats    DailyStat[]
+  browserStats  BrowserStat[]
+  deviceOsStats DeviceOsStat[]
+  hourlyStats   HourlyStat[]
+
+  @@index([userId])
+}
+
 model User {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt      DateTime @default(now())
@@ -61,7 +126,20 @@ model User {
 
   sessions            Session[]
   passwordResetTokens PasswordResetToken[]
+  shortUrls           ShortUrl[]
 
   @@map("users")
+}
+
+model VisitLog {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt  DateTime @default(now())
+  shortUrlId String
+
+  ipAddress String?
+  userAgent String?
+  referrer  String?
+
+  shortUrl ShortUrl @relation(fields: [shortUrlId], references: [id])
 }
 

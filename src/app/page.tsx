@@ -3,6 +3,9 @@ import { twMerge } from "tailwind-merge";
 import "../styles/rootPage.css";
 import Image from "next/image";
 import RootForm from "./form";
+import { Button } from "@drasla/nextjs-theme-kit";
+import { TbArrowBigDownLineFilled } from "react-icons/tb";
+import Link from "next/link";
 
 async function RootPage() {
     const locale = await getLocale();
@@ -35,6 +38,14 @@ async function RootPage() {
                         />
                     </div>
                 </div>
+            </div>
+            <div className={twMerge(["w-full"], ["flex", "justify-center"])}>
+                <Link href={"/link/list"}>
+                    <Button size={"small"} className={twMerge(["flex", "gap-2"])}>
+                        <TbArrowBigDownLineFilled />
+                        {t("page.home.buttonAllLinks")}
+                    </Button>
+                </Link>
             </div>
         </>
     );

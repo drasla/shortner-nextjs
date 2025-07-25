@@ -28,16 +28,21 @@
     },
     "validation": {
         "required": "This field is required",
-        "email": "Please enter a valid email address.",
-        "passwordLength": "Password must be at least {min} characters long.",
+        "email": "Please enter a valid email address",
+        "passwordLength": "Password must be at least {min} characters long",
         "passwordMatch": "Passwords do not match",
-        "emailExists": "Email is already in use"
+        "emailExists": "Email is already in use",
+        "url": "Please enter a valid URL"
     },
     "layout": {
         "header": {
             "signUpButtonText": "Create a free account",
             "signInButtonText": "SignIn",
             "signOutButtonText": "Logout"
+        },
+        "footer": {
+            "privacyPolicy": "Private Policy",
+            "TermsOfService": "Terms of Services"
         },
         "language": {
             "en": "English",
@@ -51,7 +56,8 @@
         "home": {
             "title": "a better way to provide URLs quickly",
             "description": "{siteName} is a tool to shorten URLs and generate short links.",
-            "placeholder": "Please enter the URL"
+            "placeholder": "Please enter the URL",
+            "buttonAllLinks": "View All Links"
         },
         "sign": {
             "in": {
@@ -67,6 +73,13 @@
                 "labelConfirmPassword": "Confirm Password",
                 "buttonText": "Sign Up"
             }
+        },
+        "linkList": {
+            "buttonCreateLink": "Create a Short Link"
+        },
+        "showShortCode": {
+            "notFound": "해당 숏코드를 찾을 수 없습니다.",
+            "notFoundMetadata": "메타데이터를 불러오는데 실패 했습니다."
         }
     }
 }

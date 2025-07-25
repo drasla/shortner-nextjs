@@ -1,0 +1,11 @@
+model VisitLog {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt  DateTime @default(now())
+  shortUrlId String
+
+  ipAddress String?
+  userAgent String?
+  referrer  String?
+
+  shortUrl ShortUrl @relation(fields: [shortUrlId], references: [id])
+}

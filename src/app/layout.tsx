@@ -6,6 +6,7 @@ import { getLocale, getMessages } from "next-intl/server";
 import HeaderComponent from "../components/layouts/header/header";
 import { HTML, Layout } from "@drasla/nextjs-theme-kit";
 import InitUserAction from "../actions/user/init/initUserAction";
+import Footer from "../components/layouts/footer/footer";
 
 export const viewport: Viewport = {
     width: "device-width",
@@ -21,7 +22,9 @@ async function RootLayout({ children }: PropsWithChildren) {
     return (
         <HTML lang={locale}>
             <NextIntlClientProvider locale={locale} messages={messages}>
-                <Layout header={<HeaderComponent />}>{children}</Layout>
+                <Layout header={<HeaderComponent />} footer={<Footer />}>
+                    {children}
+                </Layout>
             </NextIntlClientProvider>
         </HTML>
     );

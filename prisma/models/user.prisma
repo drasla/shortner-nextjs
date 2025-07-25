@@ -12,6 +12,7 @@ model User {
 
   sessions            Session[]
   passwordResetTokens PasswordResetToken[]
+  shortUrls           ShortUrl[]
 
   @@map("users")
 }

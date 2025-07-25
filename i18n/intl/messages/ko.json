@@ -31,13 +31,18 @@
         "email": "유효한 이메일 주소를 입력해주세요.",
         "passwordLength": "비밀번호는 최소 {min}자 이상이어야 합니다.",
         "passwordMatch": "비밀번호가 일치하지 않습니다.",
-        "emailExists": "이미 사용 중인 이메일 주소입니다."
+        "emailExists": "이미 사용 중인 이메일 주소입니다.",
+        "url": "유효한 URL을 입력해주세요."
     },
     "layout": {
         "header": {
             "signUpButtonText": "무료 계정 만들기",
             "signInButtonText": "로그인",
             "signOutButtonText": "로그아웃"
+        },
+        "footer": {
+            "privacyPolicy": "개인정보보호정책",
+            "TermsOfService": "서비스약관"
         },
         "language": {
             "en": "영어",
@@ -51,7 +56,8 @@
         "home": {
             "title": "URL을 빠르게 제공하기 위한 더 나은 방법",
             "description": "{siteName}은 URL을 단축하고 짧은 링크를 생성하는 도구입니다.",
-            "placeholder": "주소를 줄일 URL을 입력해주세요."
+            "placeholder": "주소를 줄일 URL을 입력해주세요.",
+            "buttonAllLinks": "모든 링크 보기"
         },
         "sign": {
             "in": {
@@ -67,6 +73,13 @@
                 "labelConfirmPassword": "비밀번호 확인",
                 "buttonText": "회원가입"
             }
+        },
+        "linkList": {
+            "buttonCreateLink": "숏링크 만들기"
+        },
+        "showShortCode": {
+            "notFound": "해당 숏코드를 찾을 수 없습니다.",
+            "notFoundMetadata": "메타데이터를 불러오는데 실패 했습니다."
         }
     }
 }

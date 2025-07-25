@@ -1,0 +1,11 @@
+model DeviceOsStat {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  device String
+  os     String
+  count  Int    @default(0)
+
+  shortUrlId String
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+
+  @@unique([shortUrlId, device, os])
+}

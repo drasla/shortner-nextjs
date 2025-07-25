@@ -13,7 +13,3 @@ export const SignInSchema = (t: (key: MessageKey, values?: MessageValues) => str
 
 export type SignInInput = z.infer<ReturnType<typeof SignInSchema>>;
 
-export type SignInActionError = {
-    fieldErrors?: Record<string, string[]>;
-    formError?: string;
-};

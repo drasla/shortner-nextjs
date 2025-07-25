@@ -1,0 +1,10 @@
+model HourlyStat {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  hour  Int
+  count Int    @default(0)
+
+  shortUrlId String
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+
+  @@unique([shortUrlId, hour])
+}

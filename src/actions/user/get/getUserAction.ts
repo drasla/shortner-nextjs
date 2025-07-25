@@ -8,7 +8,6 @@ async function GetUserAction(): Promise<UserData | null> {
     try {
         const cookieStore = await cookies();
         const sessionToken = cookieStore.get("session_token")?.value;
-
         if (!sessionToken) {
             return null;
         }
@@ -18,7 +17,7 @@ async function GetUserAction(): Promise<UserData | null> {
             include: { user: true },
         });
 
-        if (!session || !session.user.isActive || session.expiresAt > new Date()) {
+        if (!session || !session.user.isActive || session.expiresAt < new Date()) {
             return null;
         }
 

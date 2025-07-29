@@ -77,6 +77,13 @@
         "linkList": {
             "buttonCreateLink": "숏링크 만들기"
         },
+        "stats": {
+            "dailyClick": "기간별 클릭 수",
+            "hourlyClick": "시간대별 클릭 수",
+            "deviceOrOs": "디바이스 및 운영체제",
+            "browser": "브라우저",
+            "rangeDate": "최근 {days}일"
+        },
         "showShortCode": {
             "notFound": "해당 숏코드를 찾을 수 없습니다.",
             "notFoundMetadata": "메타데이터를 불러오는데 실패 했습니다."

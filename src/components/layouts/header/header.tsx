@@ -15,6 +15,7 @@ async function HeaderComponent() {
                 "w-full",
                 "h-header",
                 "px-4",
+                "z-1",
                 "bg-light-paper",
             ])}>
             <div

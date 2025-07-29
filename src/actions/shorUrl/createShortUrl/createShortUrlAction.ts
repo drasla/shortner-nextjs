@@ -36,7 +36,7 @@ async function CreateShortUrlAction(
     }
 
     try {
-        const shortCode = nanoid(8);
+        const shortCode = await generateUniqueShortCode();
 
         await prisma.shortUrl.create({
             data: {
@@ -53,6 +53,19 @@ async function CreateShortUrlAction(
             formError: t("action.serverError"),
         };
     }
+}
+
+async function generateUniqueShortCode(length = 12, maxAttempts = 5): Promise<string> {
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+        const code = nanoid(length);
+        const existing = await prisma.shortUrl.findUnique({
+            where: { shortCode: code },
+        });
+        if (!existing) {
+            return code;
+        }
+    }
+    throw new Error("Failed to generate a unique shortCode after multiple attempts");
 }
 
 export default CreateShortUrlAction;

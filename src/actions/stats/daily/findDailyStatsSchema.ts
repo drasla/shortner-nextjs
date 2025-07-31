@@ -1,17 +1,19 @@
 import { DailyStat } from "src/libraries/prisma";
 import { z } from "zod";
-import { MessageKey, MessageValues } from "../../../utilities/zod/_types";
+import { defineSchema } from "../../../utilities/zod/helper";
 
-export const FindDailyStatsSchema = (t: (key: MessageKey, values?: MessageValues) => string) => {
-    return z.object({
-        shortUrlId: z.string(),
+export const FindDailyStatsInputSchema = defineSchema(t =>
+    z.object({
+        shortUrlId: z.string({ message: t("validation.required") }),
         startDate: z.string().optional(),
         endDate: z.string().optional(),
-    });
-};
+    }),
+);
 
-export type FindDailyStatsInput = z.infer<ReturnType<typeof FindDailyStatsSchema>>;
+export type FindDailyStatsInput = z.infer<ReturnType<typeof FindDailyStatsInputSchema>>;
 
-export type FindDailyStatsOutput = {
-    dailyStats: DailyStat[];
-};
+export const FindDailyStatsOutputSchema = defineSchema(_ =>
+    z.object({ dailyStats: z.array(z.custom<DailyStat>()) }),
+);
+
+export type FindDailyStatsOutput = z.infer<ReturnType<typeof FindDailyStatsOutputSchema>>;

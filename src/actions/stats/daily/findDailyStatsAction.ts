@@ -6,7 +6,7 @@ import { FieldErrors } from "react-hook-form";
 import {
     FindDailyStatsInput,
     FindDailyStatsOutput,
-    FindDailyStatsSchema,
+    FindDailyStatsInputSchema,
 } from "./findDailyStatsSchema";
 import { ActionResult } from "src/utilities/zod/_types";
 import { createZodSchema } from "../../../utilities/zod/helper";
@@ -16,7 +16,7 @@ async function FindDailyStatsAction(
 ): Promise<ActionResult<FieldErrors<FindDailyStatsInput>, FindDailyStatsOutput>> {
     const locale = await getLocale();
     const t = await getTranslations({ locale });
-    const schema = createZodSchema(t, FindDailyStatsSchema);
+    const schema = createZodSchema(t, FindDailyStatsInputSchema);
     const parseSchema = schema.safeParse(input);
 
     if (!parseSchema.success) {

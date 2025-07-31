@@ -19,6 +19,14 @@ import { TbClick } from "react-icons/tb";
 import { Option, Select, Spinner } from "@drasla/nextjs-theme-kit";
 import { useTranslations } from "next-intl";
 import ChartTooltip from "./chartTooltip";
+import { DailyStat } from "src/libraries/prisma";
+import { fetchJson } from "../../utilities/fetch/fetchJson";
+import { ActionResult } from "../../utilities/zod/_types";
+import { FieldErrors } from "react-hook-form";
+import {
+    FindDailyStatsInput,
+    FindDailyStatsOutput,
+} from "../../actions/stats/daily/findDailyStatsSchema";
 
 type Props = {
     selectedPanel: SelectedPanelType | undefined;
@@ -28,7 +36,7 @@ type Props = {
 
 function DailyChart({ selectedPanel, selectedDate, setSelectedDate }: Props) {
     const t = useTranslations();
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<(DailyStat & { fill: string })[]>([]);
     const [loading, setLoading] = useState(true);
 
     const filledDailyStats = useMemo(() => {
@@ -48,7 +56,9 @@ function DailyChart({ selectedPanel, selectedDate, setSelectedDate }: Props) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const res = await fetch("/api/stats/daily", {
+                const result = await fetchJson<
+                    ActionResult<FieldErrors<FindDailyStatsInput>, FindDailyStatsOutput>
+                >("/api/stats/daily", {
                     body: JSON.stringify({
                         shortUrlId: selectedPanel.shortUrlId,
                         startDate,
@@ -56,9 +66,10 @@ function DailyChart({ selectedPanel, selectedDate, setSelectedDate }: Props) {
                     }),
                     method: "POST",
                 });
-                const json = await res.json();
 
-                setData(ChartUtility.applyGradientColors(json.dailyStats));
+                if (result.success && result.data) {
+                    setData(ChartUtility.applyGradientColors(result.data.dailyStats));
+                }
             } catch {
                 setData([]);
             } finally {

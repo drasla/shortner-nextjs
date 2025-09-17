@@ -22,7 +22,7 @@ model BrowserStat {
   count   Int    @default(0)
 
   shortUrlId String
-  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
 
   @@unique([shortUrlId, browser])
 }
@@ -33,7 +33,7 @@ model DailyStat {
   count Int      @default(0)
 
   shortUrlId String
-  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
 
   @@unique([shortUrlId, date])
 }
@@ -45,7 +45,7 @@ model DeviceOsStat {
   count  Int    @default(0)
 
   shortUrlId String
-  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
 
   @@unique([shortUrlId, device, os])
 }
@@ -56,7 +56,7 @@ model HourlyStat {
   count Int    @default(0)
 
   shortUrlId String
-  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
 
   @@unique([shortUrlId, hour])
 }
@@ -140,5 +140,5 @@ model VisitLog {
   userAgent String?
   referrer  String?
 
-  shortUrl ShortUrl @relation(fields: [shortUrlId], references: [id])
+  shortUrl ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
 }

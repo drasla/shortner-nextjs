@@ -55,7 +55,7 @@ async function CreateShortUrlAction(
     }
 }
 
-async function generateUniqueShortCode(length = 12, maxAttempts = 5): Promise<string> {
+async function generateUniqueShortCode(length = 10, maxAttempts = 5): Promise<string> {
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
         const code = nanoid(length);
         const existing = await prisma.shortUrl.findUnique({

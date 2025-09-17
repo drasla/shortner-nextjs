@@ -4,7 +4,7 @@ model HourlyStat {
   count Int    @default(0)
 
   shortUrlId String
-  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id])
+  shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
 
   @@unique([shortUrlId, hour])
 }

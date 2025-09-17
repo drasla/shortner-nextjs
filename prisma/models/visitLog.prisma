@@ -7,5 +7,5 @@ model VisitLog {
   userAgent String?
   referrer  String?
 
-  shortUrl ShortUrl @relation(fields: [shortUrlId], references: [id])
+  shortUrl ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
 }
